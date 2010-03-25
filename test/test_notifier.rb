@@ -40,7 +40,7 @@ class TestNotifier < Postage::Mailer
     setup_headers
 
     attachment  :content_type => 'image/jpeg',
-                :filename     => 'foo.jpg'
+                :filename     => 'foo.jpg',
                 :body         => '123456789'
   end
 

@@ -48,6 +48,16 @@ class MailerTest < Test::Unit::TestCase
     assert_equal 'image/jpeg', request.arguments[:attachments]['foo.jpg'][:content_type]
   end
   
+  def test_create_with_body_and_attachment
+    assert request = TestNotifier.create_with_body_and_attachment
+    assert !request.arguments[:content].blank?
+    assert !request.arguments[:content]['text/plain'].blank?
+    assert_equal 'body text', request.arguments[:content]['text/plain']
+    assert !request.arguments[:attachments].blank?
+    assert !request.arguments[:attachments]['foo.jpg'][:content].blank?
+    assert_equal 'image/jpeg', request.arguments[:attachments]['foo.jpg'][:content_type]
+  end
+
   def test_create_with_custom_postage_variables
     assert request = TestNotifier.create_with_custom_postage_variables
     assert_equal 'test_template', request.arguments[:template]

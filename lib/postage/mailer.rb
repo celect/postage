@@ -61,6 +61,7 @@ class Postage::Mailer < ActionMailer::Base
       self.parts.each do |part|
         case part.content_disposition
         when 'inline'
+          part.content_type = 'text/plain' if part.content_type.blank? && String === part.body
           params[:content][part.content_type] = part.body
         when 'attachment'
           params[:attachments][part.filename] = {

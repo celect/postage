@@ -70,7 +70,7 @@ protected
     return unless Postage.failed_calls.include?(self.api_method.to_s)
     
     # notification for hoptoad users
-    notify_hoptoad(e) if defined?(Hoptoad)
+    HoptoadNotifier.notify(e) if defined?(HoptoadNotifier)
     
     # creating directory, unless if already exists
     FileUtils.mkdir_p(Postage.failed_calls_path) unless File.exists?(Postage.failed_calls_path)

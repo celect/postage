@@ -63,7 +63,23 @@ class Postage::Request
     store_failed_request(e) unless resending 
     return nil # no response generated
   end
-  
+
+  def to
+    [arguments[:recipients]].flatten
+  end
+
+  def from
+    [arguments[:headers][:from]].flatten if arguments.has_key? :headers
+  end
+
+  def subject
+    arguments[:headers][:subject] if arguments.has_key? :headers
+  end
+
+  def body
+    arguments[:content]['text/plain'] if arguments.has_key? :content
+  end
+
 protected
   
   def store_failed_request(e)

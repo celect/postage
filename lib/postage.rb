@@ -56,7 +56,7 @@ module Postage
     end
     
     def failed_calls_path
-      @failed_calls_path ||= Rails.root.join('tmp', 'stored_requests')
+      @failed_calls_path ||= File.join(RAILS_ROOT, 'tmp', 'stored_requests')
     end
     
     def logger
